@@ -2,9 +2,9 @@
 
 **_Os trechos em itálico servem apenas como guia para o preenchimento da seção. Por esse motivo, não devem fazer parte da documentação final._**
 
-## Nome do Projeto
+## Nome do Projeto: Gerenciador de tarefas para organização e produtividade(ainda sem nome).
 
-#### Autor do projeto
+#### Autor do projeto: Bernardo Laurindo Gonzaga
 
 ## Sumário
 
@@ -18,8 +18,11 @@
 
 ## <a name="c1"></a>1. Introdução (Semana 01)
 
-*Preencha com até 300 palavras – sem necessidade de fonte.*
-*Descreva brevemente o sistema que você irá desenvolver.*
+No mundo atual, a organização pessoal e a gestão de atividades são fundamentais para manter a produtividade. Pensando nisso, o sistema que será desenvolvido é um Gerenciador de Tarefas Web, focado em facilitar o planejamento e acompanhamento de atividades diárias.
+A plataforma permitirá aos usuários criar, editar, visualizar e excluir tarefas, além de organizá-las por status (pendente, em andamento e concluída).
+O objetivo é construir uma aplicação moderna, responsiva e intuitiva, acessível tanto via desktop quanto dispositivos móveis. O sistema contará com recursos de autenticação de usuários, categorização de tarefas e filtragem por prioridade e prazo.
+Esse projeto aplicará conceitos de desenvolvimento web fullstack, incluindo frontend (React e JavaScript), backend (Node.js e JavaScript) e banco de dados (SQL/SUPABASE), garantindo integração eficiente entre todas as camadas.
+O resultado final será um sistema funcional que pode ser utilizado como produto real e apresentado em portfólios ou processos seletivos.
 
 ---
 
@@ -27,11 +30,38 @@
 
 ### 2.1. Personas (Semana 01)
 
-*Posicione aqui sua(s) Persona(s) em forma de texto markdown com imagens, ou como imagem de template preenchido. Atualize esta seção ao longo do módulo se necessário.*
+![alt text](<Blue And White Modern User Persona Graph.png>)
 
 ### 2.2. User Stories (Semana 01)
 
-*Posicione aqui a lista de User Stories levantadas para o projeto. Siga o template de User Stories e utilize a referência USXX para numeração (US01, US02, US03, ...). Indique todas as User Stories mapeadas, mesmo aquelas que não forem implementadas ao longo do projeto. Não se esqueça de explicar o INVEST de 1 User Storie prioritária.*
+US01 | Como estudante universitário, quero cadastrar novas tarefas com prazos definidos, para que eu possa me organizar melhor com os trabalhos e provas.
+
+US02 | Como freelancer de design gráfico, quero visualizar minhas tarefas em uma lista por ordem de prioridade, para que eu possa entregar projetos com mais eficiência.
+
+US03 | Como mãe que trabalha em home office, quero receber lembretes sobre tarefas do dia, para que eu possa conciliar melhor o trabalho com as obrigações da casa.
+
+---
+
+### 📋 Análise da User Story US01 com base no INVEST:
+US01 | Como estudante universitário, quero cadastrar novas tarefas com prazos definidos, para que eu possa me organizar melhor com os trabalhos e provas.
+
+I – Independente:
+Pode ser desenvolvida de forma separada de outras funcionalidades, como edição, exclusão ou notificações.
+
+N – Negociável:
+A forma como o usuário insere os dados (ex.: descrição longa, tags, prioridade) pode ser ajustada durante o desenvolvimento.
+
+V – Valiosa:
+É uma das funções mais importantes para o sistema — sem ela, o usuário não consegue organizar suas atividades.
+
+E – Estimável:
+É possível estimar com clareza o tempo e recursos necessários para construir essa funcionalidade.
+
+S – Pequena (Small):
+Foca apenas na criação de tarefas e é viável de ser entregue em um curto espaço de tempo.
+
+T – Testável:
+Pode ser validada facilmente ao verificar se uma nova tarefa cadastrada aparece corretamente na lista.
 
 ---
 
