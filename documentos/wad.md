@@ -30,7 +30,7 @@ O resultado final será um sistema funcional que pode ser utilizado como produto
 
 ### 2.1. Personas (Semana 01)
 
-![alt text](<Blue And White Modern User Persona Graph.png>)
+![alt text](../assets/Persona.png)
 
 ### 2.2. User Stories (Semana 01)
 
