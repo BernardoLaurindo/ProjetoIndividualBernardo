@@ -18,11 +18,15 @@
 
 ## <a name="c1"></a>1. Introdução (Semana 01)
 
-No mundo atual, a organização pessoal e a gestão de atividades são fundamentais para manter a produtividade. Pensando nisso, o sistema que será desenvolvido é um Gerenciador de Tarefas Web, focado em facilitar o planejamento e acompanhamento de atividades diárias.
-A plataforma permitirá aos usuários criar, editar, visualizar e excluir tarefas, além de organizá-las por status (pendente, em andamento e concluída).
-O objetivo é construir uma aplicação moderna, responsiva e intuitiva, acessível tanto via desktop quanto dispositivos móveis. O sistema contará com recursos de autenticação de usuários, categorização de tarefas e filtragem por prioridade e prazo.
+&emsp;No mundo atual, a organização pessoal e a gestão de atividades são fundamentais para manter a produtividade. Pensando nisso, o sistema que será desenvolvido é um Gerenciador de Tarefas Web, focado em facilitar o planejamento e acompanhamento de atividades diárias.
+
+&emsp;A plataforma permitirá aos usuários criar, editar, visualizar e excluir tarefas, além de organizá-las por status (pendente, em andamento e concluída).
+O objetivo é construir uma aplicação moderna, responsiva e intuitiva, acessível tanto via desktop quanto dispositivos móveis. 
+
+&emsp;O sistema contará com recursos de autenticação de usuários, categorização de tarefas e filtragem por prioridade e prazo.
 Esse projeto aplicará conceitos de desenvolvimento web fullstack, incluindo frontend (React e JavaScript), backend (Node.js e JavaScript) e banco de dados (SQL/SUPABASE), garantindo integração eficiente entre todas as camadas.
-O resultado final será um sistema funcional que pode ser utilizado como produto real e apresentado em portfólios ou processos seletivos.
+
+&emsp;O resultado final será um sistema funcional que pode ser utilizado como produto real e apresentado em portfólios ou processos seletivos.
 
 ---
 
@@ -69,10 +73,192 @@ Pode ser validada facilmente ao verificar se uma nova tarefa cadastrada aparece 
 
 ### 3.1. Modelagem do banco de dados  (Semana 3)
 
-*Posicione aqui os diagramas de modelos relacionais do seu banco de dados, apresentando todos os esquemas de tabelas e suas relações. Utilize texto para complementar suas explicações, se necessário.*
+### 1. Introdução
+Este documento descreve a estrutura e os principais componentes do sistema de gerenciamento de tarefas, com foco no modelo de dados. O objetivo é apresentar a modelagem do banco de dados relacional utilizado, detalhar suas tabelas, atributos e os relacionamentos entre elas.
 
-*Posicione também o modelo físico com o Schema do BD (arquivo .sql)*
+### 2. Diagrama 
+Abaixo, encontra-se o diagrama que ilustra a modelagem do banco de dados utilizada no sistema:
 
+![alt text](modelo-banco-1.png)
+
+### 3. Descrição das Tabelas e Relacionamentos
+A seguir, são descritas as tabelas do banco de dados, seus principais atributos e a cardinalidade das relações:
+
+### 3.1 Tabela users 📋
+Armazena os dados dos usuários do sistema.
+
+Atributos principais: id, name, email, password, created_at
+
+Relacionamentos:
+
+1 usuário → N categorias
+
+1 usuário → N tarefas
+
+1 usuário → N comentários
+
+1 usuário → N entradas no histórico
+
+### 3.2 Tabela categories 📋
+Define categorias de tarefas criadas por usuários.
+
+Atributos principais: id, name, description, user_id
+
+Relacionamentos:
+
+1 categoria → N tarefas
+
+N categorias → 1 usuário
+
+### 3.3 Tabela priorities 📋
+Lista os níveis de prioridade para tarefas.
+
+Atributos principais: id, level
+
+Relacionamentos:
+
+1 prioridade → N tarefas
+
+### 3.4 Tabela tasks 📋
+Representa as tarefas criadas no sistema.
+
+Atributos principais: id, title, description, due_date, status, user_id, category_id, priority_id, created_at, updated_at
+
+Relacionamentos:
+
+1 tarefa → N comentários
+
+1 tarefa → N anexos
+
+1 tarefa → N entradas no histórico
+
+N tarefas → 1 usuário, 1 categoria, 1 prioridade
+
+N tarefas ↔ N tags (via task_tags)
+
+### 3.5 Tabela comments 📋
+Contém os comentários feitos nas tarefas.
+
+Atributos principais: id, task_id, user_id, content, created_at
+
+Relacionamentos:
+
+N comentários → 1 tarefa
+
+N comentários → 1 usuário
+
+### 3.6 Tabela attachments 📋
+Armazena arquivos anexados às tarefas.
+
+Atributos principais: id, task_id, file_url, uploaded_at
+
+Relacionamentos:
+
+N anexos → 1 tarefa
+
+### 3.7 Tabela tags 📋
+Define etiquetas que podem ser associadas a tarefas.
+
+Atributos principais: id, name
+
+Relacionamentos:
+
+N tags ↔ N tarefas (via task_tags)
+
+### 3.8 Tabela task_tags 📋
+Tabela de junção para o relacionamento entre tarefas e tags.
+
+Atributos principais: task_id, tag_id
+
+Relacionamentos:
+
+N tarefas ↔ N tags
+
+### 3.9 Tabela task_history 📋
+Registra as alterações feitas nas tarefas.
+
+Atributos principais: id, task_id, user_id, field_changed, old_value, new_value, changed_at
+
+Relacionamentos:
+
+N entradas → 1 tarefa
+
+N entradas → 1 usuário
+
+
+### 4. ModeloModelo Físico (código SQL) 
+```
+Table users {
+  id int [pk, increment]
+  name varchar
+  email varchar [unique]
+  password varchar
+  created_at datetime
+}
+
+Table categories {
+  id int [pk, increment]
+  name varchar
+  description text
+  user_id int [ref: > users.id]
+}
+
+Table priorities {
+  id int [pk, increment]
+  level varchar // ex: Alta, Média, Baixa
+}
+
+Table tasks {
+  id int [pk, increment]
+  title varchar
+  description text
+  due_date datetime
+  status varchar // ex: "pendente", "em andamento", "concluída"
+  user_id int [ref: > users.id]
+  category_id int [ref: > categories.id]
+  priority_id int [ref: > priorities.id]
+  created_at datetime
+  updated_at datetime
+}
+
+Table comments {
+  id int [pk, increment]
+  task_id int [ref: > tasks.id]
+  user_id int [ref: > users.id]
+  content text
+  created_at datetime
+}
+
+Table attachments {
+  id int [pk, increment]
+  task_id int [ref: > tasks.id]
+  file_url varchar
+  uploaded_at datetime
+}
+
+Table tags {
+  id int [pk, increment]
+  name varchar
+}
+
+Table task_tags {
+  task_id int [ref: > tasks.id, pk]
+  tag_id int [ref: > tags.id, pk]
+}
+
+
+Table task_history {
+  id int [pk, increment]
+  task_id int [ref: > tasks.id]
+  user_id int [ref: > users.id]
+  field_changed varchar
+  old_value text
+  new_value text
+  changed_at datetime
+}
+
+```
+---
 ### 3.1.1 BD e Models (Semana 5)
 *Descreva aqui os Models implementados no sistema web*
 
