@@ -47,7 +47,6 @@ Dentre os arquivos e pastas presentes na raiz do projeto, definem-se:
 
 - <b>document</b>: aqui estão todos os documentos do projeto, como o Web Application  Document (WAD) bem como documentos complementares, na pasta "other".
 
-- <b>src</b>: Todo o código fonte criado para o desenvolvimento do projeto de aplicação web.
 ┣ 📂config         → Conexão com o banco (db.js)
 
 ┣ 📂models         → Acesso aos dados (aluno.js)
