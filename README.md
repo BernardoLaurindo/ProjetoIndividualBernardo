@@ -45,7 +45,11 @@ Dentre os arquivos e pastas presentes na raiz do projeto, definem-se:
 
 - <b>assets</b>: aqui estão os arquivos relacionados a elementos não-estruturados deste repositório, como imagens.
 
-- <b>document</b>: aqui estão todos os documentos do projeto, como o Web Application  Document (WAD) bem como documentos complementares, na pasta "other".
+- <b>documentos</b>: aqui estão todos os documentos do projeto, como o Web Application  Document (WAD) bem como documentos complementares, na pasta "other".
+
+- <b>README.md</b>: arquivo que serve como guia introdutório e explicação geral sobre o projeto e a aplicação (o mesmo arquivo que você está lendo agora).
+
+- <b> Esquema de pastas do site </b>: Estrutura de pastas no qual esta as configuracoes da raiz do projeto.
 
 ┣ 📂config         → Conexão com o banco (db.js)
 
@@ -66,8 +70,6 @@ Dentre os arquivos e pastas presentes na raiz do projeto, definem-se:
 ┣ 📜 .env          → Variáveis de ambiente (credenciais do banco)
 
 ┣ 📜 package.json  → Dependências do projeto
-
-- <b>README.md</b>: arquivo que serve como guia introdutório e explicação geral sobre o projeto e a aplicação (o mesmo arquivo que você está lendo agora).
 
 ## 💻 Configuração para desenvolvimento e execução do código
 
