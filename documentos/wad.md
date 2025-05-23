@@ -275,7 +275,19 @@ Table task_history {
 
 ### 3.3. Wireframes (Semana 03)
 
-*Posicione aqui as imagens do wireframe construído para sua solução e, opcionalmente, o link para acesso (mantenha o link sempre público para visualização).*
+![alt text](WireFrame.jpeg)
+
+O wireframe apresentado está diretamente alinhado com os User Stories definidos na Semana 01, especialmente com a US01, US02 e, parcialmente, com a US03:
+
+**US01** – Cadastrar novas tarefas com prazos definidos: O formulário "Adicionar Nova Tarefa" contempla campos como título, descrição, prazo e categoria, atendendo à necessidade do estudante universitário de registrar e organizar suas tarefas acadêmicas de forma estruturada e prática.
+
+**US02** – Visualizar tarefas por ordem de prioridade: A seção "Minhas Tarefas" exibe tarefas com marcadores visuais (cores e status) e permite a filtragem por prioridade, oferecendo ao freelancer de design gráfico uma forma clara de identificar o que é mais urgente.
+
+**US03** – Receber lembretes de tarefas do dia: Apesar de o wireframe não exibir explicitamente uma funcionalidade de lembretes, a estrutura atual (com prazos visíveis e categorização clara) fornece a base necessária para que uma funcionalidade de notificações possa ser facilmente incorporada no futuro.
+
+O wireframe, portanto, traduz visualmente os objetivos das histórias de usuário, garantindo que as funcionalidades essenciais estejam representadas e preparadas para evoluções conforme o projeto avança.
+
+link para melhor vizualização do WireFrame: https://www.figma.com/design/aHfdHuaLQGHvrgSiBSu3jp/WireFrame-Projeto-Individual?node-id=0-1&t=EaGnN8jyxlgMmLQW-1
 
 ### 3.4. Guia de estilos (Semana 05)
 
