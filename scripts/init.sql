@@ -86,4 +86,3 @@ CREATE TABLE task_history (
     FOREIGN KEY (task_id) REFERENCES tasks(id),
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
-
