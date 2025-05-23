@@ -1,68 +1,89 @@
-Table users {
-  id int [pk, increment]
-  name varchar
-  email varchar [unique]
-  password varchar
-  created_at datetime
-}
+-- Tabela de Usuários
+CREATE TABLE users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    created_at DATETIME NOT NULL
+);
 
-Table categories {
-  id int [pk, increment]
-  name varchar
-  description text
-  user_id int [ref: > users.id]
-}
+-- Tabela de Categorias
+CREATE TABLE categories (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    user_id INT,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
 
-Table priorities {
-  id int [pk, increment]
-  level varchar // ex: Alta, Média, Baixa
-}
+-- Tabela de Prioridades
+CREATE TABLE priorities (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    level VARCHAR(50) NOT NULL -- Ex: Alta, Média, Baixa
+);
 
-Table tasks {
-  id int [pk, increment]
-  title varchar
-  description text
-  due_date datetime
-  status varchar // ex: "pendente", "em andamento", "concluída"
-  user_id int [ref: > users.id]
-  category_id int [ref: > categories.id]
-  priority_id int [ref: > priorities.id]
-  created_at datetime
-  updated_at datetime
-}
+-- Tabela de Tarefas
+CREATE TABLE tasks (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    due_date DATETIME,
+    status VARCHAR(50) NOT NULL, -- Ex: pendente, em andamento, concluída
+    user_id INT,
+    category_id INT,
+    priority_id INT,
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (category_id) REFERENCES categories(id),
+    FOREIGN KEY (priority_id) REFERENCES priorities(id)
+);
 
-Table comments {
-  id int [pk, increment]
-  task_id int [ref: > tasks.id]
-  user_id int [ref: > users.id]
-  content text
-  created_at datetime
-}
+-- Tabela de Comentários
+CREATE TABLE comments (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    task_id INT,
+    user_id INT,
+    content TEXT NOT NULL,
+    created_at DATETIME NOT NULL,
+    FOREIGN KEY (task_id) REFERENCES tasks(id),
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
 
-Table attachments {
-  id int [pk, increment]
-  task_id int [ref: > tasks.id]
-  file_url varchar
-  uploaded_at datetime
-}
+-- Tabela de Anexos
+CREATE TABLE attachments (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    task_id INT,
+    file_url VARCHAR(500) NOT NULL,
+    uploaded_at DATETIME NOT NULL,
+    FOREIGN KEY (task_id) REFERENCES tasks(id)
+);
 
-Table tags {
-  id int [pk, increment]
-  name varchar
-}
+-- Tabela de Tags
+CREATE TABLE tags (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL
+);
 
-Table task_tags {
-  task_id int [ref: > tasks.id, pk]
-  tag_id int [ref: > tags.id, pk]
-}
+-- Tabela de Associação de Tags nas Tarefas (Many-to-Many)
+CREATE TABLE task_tags (
+    task_id INT,
+    tag_id INT,
+    PRIMARY KEY (task_id, tag_id),
+    FOREIGN KEY (task_id) REFERENCES tasks(id),
+    FOREIGN KEY (tag_id) REFERENCES tags(id)
+);
 
+-- Tabela de Histórico de Alterações das Tarefas
+CREATE TABLE task_history (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    task_id INT,
+    user_id INT,
+    field_changed VARCHAR(100) NOT NULL,
+    old_value TEXT,
+    new_value TEXT,
+    changed_at DATETIME NOT NULL,
+    FOREIGN KEY (task_id) REFERENCES tasks(id),
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
 
-Table task_history {
-  id int [pk, increment]
-  task_id int [ref: > tasks.id]
-  user_id int [ref: > users.id]
-  field_changed varchar
-  old_value text
-  new_value text
-  changed_at datetime
-}
