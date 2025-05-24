@@ -1,6 +1,4 @@
--- init.sql
-
--- Criar extensão para suportar UUIDs, se ainda não estiver ativada
+-- Criar extensão para suportar UUIDs
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 -- Tabela de Usuários
@@ -12,21 +10,6 @@ CREATE TABLE IF NOT EXISTS users (
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
--- Tabela de Categorias
-CREATE TABLE IF NOT EXISTS categories (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    name VARCHAR(100) NOT NULL,
-    description TEXT,
-    user_id UUID,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
-);
-
--- Tabela de Prioridades
-CREATE TABLE IF NOT EXISTS priorities (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    level VARCHAR(50) NOT NULL -- Ex: Alta, Média, Baixa
-);
-
 -- Tabela de Tarefas
 CREATE TABLE IF NOT EXISTS tasks (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -34,60 +17,25 @@ CREATE TABLE IF NOT EXISTS tasks (
     description TEXT,
     due_date TIMESTAMP,
     status VARCHAR(50) NOT NULL, -- Ex: pendente, em andamento, concluída
+    priority VARCHAR(50) CHECK (priority IN ('Alta', 'Média', 'Baixa')),
+    category VARCHAR(100),
+    tags TEXT[], -- lista de tags como array
+    history JSONB, -- log de alterações (opcional)
     user_id UUID,
-    category_id UUID,
-    priority_id UUID,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE SET NULL,
-    FOREIGN KEY (priority_id) REFERENCES priorities(id) ON DELETE SET NULL
-);
-
--- Tabela de Comentários
-CREATE TABLE IF NOT EXISTS comments (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    task_id UUID,
-    user_id UUID,
-    content TEXT NOT NULL,
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
--- Tabela de Anexos
-CREATE TABLE IF NOT EXISTS attachments (
+-- Tabela genérica para Comentários e Anexos
+CREATE TABLE IF NOT EXISTS task_items (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    task_id UUID,
-    file_url VARCHAR(500) NOT NULL,
-    uploaded_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE
-);
-
--- Tabela de Tags
-CREATE TABLE IF NOT EXISTS tags (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    name VARCHAR(100) NOT NULL
-);
-
--- Tabela de Associação de Tags nas Tarefas (Many-to-Many)
-CREATE TABLE IF NOT EXISTS task_tags (
-    task_id UUID,
-    tag_id UUID,
-    PRIMARY KEY (task_id, tag_id),
-    FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE,
-    FOREIGN KEY (tag_id) REFERENCES tags(id) ON DELETE CASCADE
-);
-
--- Tabela de Histórico de Alterações das Tarefas
-CREATE TABLE IF NOT EXISTS task_history (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    task_id UUID,
-    user_id UUID,
-    field_changed VARCHAR(100) NOT NULL,
-    old_value TEXT,
-    new_value TEXT,
-    changed_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    task_id UUID NOT NULL,
+    user_id UUID, -- apenas para comentários
+    type VARCHAR(20) NOT NULL CHECK (type IN ('comment', 'attachment')),
+    content TEXT, -- usado se for comentário
+    file_url VARCHAR(500), -- usado se for anexo
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
 );
