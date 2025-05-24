@@ -1,53 +1,35 @@
+// server.js
 require('dotenv').config();
 const express = require('express');
-const app = express();
+const cors = require('cors');
+const bodyParser = require('body-parser');
 const db = require('./config/db');
-const path = require('path');
+const routes = require('./routes'); // <-- Centralizador de rotas
 
-// Configuração do template engine EJS
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+const app = express();
+const port = process.env.PORT || 3000;
 
-// Conexão com o banco de dados
+// Middlewares
+app.use(cors());
+app.use(bodyParser.json());
+
+// Conexão com o banco
 db.connect()
   .then(() => {
     console.log('Conectado ao banco de dados PostgreSQL');
 
-    // Middlewares
-    app.use(express.json());
-    app.use(express.urlencoded({ extended: true }));
-    app.use(express.static('public'));
+    // Usar rotas com prefixo /api
+    app.use('/api', routes);
 
-    // Rotas da API
-    const userRoutes = require('./routes/userRoutes');
-    const taskRoutes = require('./routes/taskRoutes');
-    const taskItemRoutes = require('./routes/taskItemRoutes');
-
-    app.use('/users', userRoutes);
-    app.use('/tasks', taskRoutes);
-    app.use('/task-items', taskItemRoutes);
-
-    // Rotas de frontend (se estiver usando páginas EJS)
-    const frontendRoutes = require('./routes/frontRoutes');
-    app.use('/', frontendRoutes);
-
-    // Middleware para 404
-    app.use((req, res, next) => {
-      res.status(404).send('Página não encontrada');
+    // Middleware para rota não encontrada
+    app.use((req, res) => {
+      res.status(404).json({ error: 'Rota não encontrada' });
     });
 
-    // Middleware para erro interno
-    app.use((err, req, res, next) => {
-      console.error(err.stack);
-      res.status(500).send('Erro no servidor');
-    });
-
-    // Iniciar o servidor
-    const PORT = process.env.PORT || 3000;
-    app.listen(PORT, () => {
-      console.log(`Servidor rodando na porta ${PORT}`);
+    app.listen(port, () => {
+      console.log(`Servidor rodando na porta ${port}`);
     });
   })
-  .catch(err => {
+  .catch((err) => {
     console.error('Erro ao conectar ao banco de dados:', err);
   });
