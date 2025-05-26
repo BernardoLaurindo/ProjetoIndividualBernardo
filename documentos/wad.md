@@ -260,18 +260,69 @@ Table task_history {
 ```
 ---
 ### 3.1.1 BD e Models (Semana 5)
-*Descreva aqui os Models implementados no sistema web*
+
+&emsp;No padrão MVC (Model-View-Controller), os Models são responsáveis por acessar e manipular os dados no banco. No meu projeto, criei três models principais: `User`, `Task` e `TaskItem`, cada um encapsulando operações específicas da sua respectiva tabela no banco de dados.
+
+## 👤 User Model
+Responsável pelas operações relacionadas aos usuários:
+
+* `getAll()`: retorna todos os usuários cadastrados.
+
+* `getById(id)`: retorna um usuário específico pelo `id`.
+
+* `createUser(data)`: insere um novo usuário com `name`, `email` e `password`.
+
+* `updateUser(id, data)`: atualiza os dados de um usuário existente.
+
+* `deleteUser(id)`: remove um usuário do banco de dados.
+
+_💡 Utiliza parâmetros para evitar SQL Injection e retorna os dados atualizados com `RETURNING`._
+
+## Task Model ✅
+
+Gerencia as tarefas atribuídas aos usuários:
+
+* `getAll()`: lista todas as tarefas.
+
+* `getById(id)`: retorna uma tarefa específica.
+
+* `createTask(data)`: cria uma nova tarefa com campos como `title`, `description`, `due_date`, `priority`, `status`, `category`, `tags`, e `user_id`.
+
+* `updateTask(id, data)`: atualiza uma tarefa e define `updated_at` automaticamente.
+
+* `deleteTask(id)`: remove a tarefa do banco.
+
+_📌 A relação com o usuário é feita via `user_id`, conectando cada tarefa a um dono._
+
+## 📄 TaskItem Model
+Reflete conteúdos multimídia ou subtarefas dentro de uma `Task`:
+
+* `getAllTaskItems()`: retorna todos os registros da tabela `task_items`.
+
+* `getTaskItemById(id)`: busca um item específico pelo `id`.
+
+* `createTaskItem(data)`: cria um item vinculado a uma tarefa (`task_id`) e um usuário (`user_id`). Pode ser um texto (`content`) ou um arquivo (`file_url`).
+
+* `updateTaskItem(id, data)`: atualiza os dados do item.
+
+* `deleteTaskItem(id)`: remove um item.
+
+_📎 Esse model permite que cada tarefa tenha múltiplos conteúdos associados, como documentos ou comentários._
+
+## 📦 Considerações Técnicas
+* Todos os models usam **async/await** para operações assíncronas com o banco.
+
+* Usam **pg** para conexão com PostgreSQL via **db.query(...)**.
+
+* As operações de **INSERT**, **UPDATE** e **DELETE** retornam os dados afetados, o que facilita o uso no front-end e testes.
 
 ### 3.2. Arquitetura (Semana 5)
 
-*Posicione aqui o diagrama de arquitetura da sua solução de aplicação web. Atualize sempre que necessário.*
-
-**Instruções para criação do diagrama de arquitetura**  
+![alt text](image.png)
+ 
 - **Model**: A camada que lida com a lógica de negócios e interage com o banco de dados.
 - **View**: A camada responsável pela interface de usuário.
 - **Controller**: A camada que recebe as requisições, processa as ações e atualiza o modelo e a visualização.
-  
-*Adicione as setas e explicações sobre como os dados fluem entre o Model, Controller e View.*
 
 ### 3.3. Wireframes (Semana 03)
 
@@ -300,7 +351,75 @@ link para melhor vizualização do WireFrame: https://www.figma.com/design/aHfdH
 
 ### 3.6. WebAPI e endpoints (Semana 05)
 
-*Utilize um link para outra página de documentação contendo a descrição completa de cada endpoint. Ou descreva aqui cada endpoint criado para seu sistema.*  
+## 🚀 ENDPOINTS DO SISTEMA
+
+### 👤 Usuários (Users)
+
+| Método | Rota         | Descrição                              | Função do controller |
+| ------ | ------------ | -------------------------------------- | -------------------- |
+| GET    | `/users`     | Lista todos os usuários                | `getAll()`           |
+| GET    | `/users/:id` | Retorna um usuário específico por `id` | `getById()`          |
+| POST   | `/users`     | Cria um novo usuário                   | `createUser()`       |
+| PUT    | `/users/:id` | Atualiza um usuário                    | `updateUser()`       |
+| DELETE | `/users/:id` | Remove um usuário                      | `deleteUser()`       |
+
+**📌 Observações**:
+
+* O `POST /users` espera `name`, `email`, `password` no body.
+
+* O `PUT` atualiza os mesmos campos.
+
+* O sistema retorna erro 404 caso o `id` não seja encontrado.
+
+---
+
+### ✅ Tarefas (Tasks)
+
+| Método | Rota         | Descrição                       | Função do controller |
+| ------ | ------------ | ------------------------------- | -------------------- |
+| GET    | `/tasks`     | Lista todas as tarefas          | `getAllTasks()`      |
+| GET    | `/tasks/:id` | Retorna uma tarefa específica   | `getTaskById()`      |
+| POST   | `/tasks`     | Cria uma nova tarefa            | `createTask()`       |
+| PUT    | `/tasks/:id` | Atualiza os dados de uma tarefa | `updateTask()`       |
+| DELETE | `/tasks/:id` | Exclui uma tarefa               | `deleteTask()`       |
+
+**📌 Observações**:
+
+* `POST /tasks` espera um objeto com: `title`, `description`, `due_date`, `status`, `priority`, `category`, `tags`, `user_id`.
+
+* Campos opcionais como `tags` e `category` devem ser tratados no front.
+
+* No `PUT`, o campo `updated_at` é atualizado automaticamente.
+
+---
+
+### 📄 Itens da Tarefa (TaskItems)
+
+| Método | Rota              | Descrição                                | Função do controller |
+| ------ | ----------------- | ---------------------------------------- | -------------------- |
+| GET    | `/task-items`     | Lista todos os itens de tarefa           | `getAllTaskItems()`  |
+| GET    | `/task-items/:id` | Retorna um item de tarefa por `id`       | `getTaskItemById()`  |
+| POST   | `/task-items`     | Cria um novo item de tarefa              | `createTaskItem()`   |
+| PUT    | `/task-items/:id` | Atualiza `content` ou `file_url` do item | `updateTaskItem()`   |
+| DELETE | `/task-items/:id` | Deleta um item da tarefa                 | `deleteTaskItem()`   |
+
+**📌 Observações:**
+
+* Um item pode conter `content` (texto), `file_url` (link de arquivo) ou ambos.
+
+* Está relacionado com uma tarefa (`task_id`) e um usuário (`user_id`).
+
+---
+
+### 🧩 Integração entre os dados
+
+* Um `user` pode ter várias `tasks`.
+
+* Uma `task` pode ter vários `task_items`.
+
+* Um `task_item` pertence a uma `task` e a um `user`.
+
+
 
 ### 3.7 Interface e Navegação (Semana 07)
 
