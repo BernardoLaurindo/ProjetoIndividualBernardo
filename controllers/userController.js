@@ -1,17 +1,17 @@
-const userService = require('../models/userModel');
+const userModel = require('../models/userModel');
 
-const getAllUsers = async (req, res) => {
+const getAll = async (req, res) => {
   try {
-    const users = await userService.getAllUsers();
+    const users = await userModel.getAll();
     res.status(200).json(users);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
-const getUserById = async (req, res) => {
+const getById = async (req, res) => {
   try {
-    const user = await userService.getUserById(req.params.id);
+    const user = await userModel.getById(req.params.id);
     if (user) {
       res.status(200).json(user);
     } else {
@@ -25,7 +25,7 @@ const getUserById = async (req, res) => {
 const createUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
-    const newUser = await userService.createUser(name, email, password);
+    const newUser = await userModel.create({ name, email, password });
     res.status(201).json(newUser);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -35,7 +35,7 @@ const createUser = async (req, res) => {
 const updateUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
-    const updatedUser = await userService.updateUser(req.params.id, name, email, password);
+    const updatedUser = await userModel.update(req.params.id, { name, email, password });
     if (updatedUser) {
       res.status(200).json(updatedUser);
     } else {
@@ -48,9 +48,9 @@ const updateUser = async (req, res) => {
 
 const deleteUser = async (req, res) => {
   try {
-    const deletedUser = await userService.deleteUser(req.params.id);
-    if (deletedUser) {
-      res.status(200).json(deletedUser);
+    const deleted = await userModel.delete(req.params.id);
+    if (deleted) {
+      res.status(200).json({ message: 'Usuário deletado com sucesso' });
     } else {
       res.status(404).json({ error: 'Usuário não encontrado' });
     }
@@ -60,8 +60,8 @@ const deleteUser = async (req, res) => {
 };
 
 module.exports = {
-  getAllUsers,
-  getUserById,
+  getAll,
+  getById,
   createUser,
   updateUser,
   deleteUser
