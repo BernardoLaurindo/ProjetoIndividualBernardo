@@ -1,8 +1,8 @@
-const taskItemService = require('../models/taskItemModel');
+const taskItemModel = require('../models/taskItemModel');
 
 const getAllTaskItems = async (req, res) => {
   try {
-    const items = await taskItemService.getAllTaskItems();
+    const items = await taskItemModel.getAllTaskItems();
     res.status(200).json(items);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -11,7 +11,7 @@ const getAllTaskItems = async (req, res) => {
 
 const getTaskItemById = async (req, res) => {
   try {
-    const item = await taskItemService.getTaskItemById(req.params.id);
+    const item = await taskItemModel.getTaskItemById(req.params.id);
     if (item) {
       res.status(200).json(item);
     } else {
@@ -25,7 +25,7 @@ const getTaskItemById = async (req, res) => {
 const createTaskItem = async (req, res) => {
   try {
     const { task_id, user_id, type, content, file_url } = req.body;
-    const newItem = await taskItemService.createTaskItem(task_id, user_id, type, content, file_url);
+    const newItem = await taskItemModel.createTaskItem(task_id, user_id, type, content, file_url);
     res.status(201).json(newItem);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -35,7 +35,7 @@ const createTaskItem = async (req, res) => {
 const updateTaskItem = async (req, res) => {
   try {
     const { task_id, user_id, type, content, file_url } = req.body;
-    const updatedItem = await taskItemService.updateTaskItem(req.params.id, task_id, user_id, type, content, file_url);
+    const updatedItem = await taskItemModel.updateTaskItem(req.params.id, task_id, user_id, type, content, file_url);
     if (updatedItem) {
       res.status(200).json(updatedItem);
     } else {
@@ -48,7 +48,7 @@ const updateTaskItem = async (req, res) => {
 
 const deleteTaskItem = async (req, res) => {
   try {
-    const deletedItem = await taskItemService.deleteTaskItem(req.params.id);
+    const deletedItem = await taskItemModel.deleteTaskItem(req.params.id);
     if (deletedItem) {
       res.status(200).json(deletedItem);
     } else {
