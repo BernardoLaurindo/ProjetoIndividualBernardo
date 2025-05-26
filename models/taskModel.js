@@ -11,7 +11,7 @@ class Task {
     return result.rows[0];
   }
 
-  static async create(data) {
+  static async createTask(data) {
     const result = await db.query(
       `INSERT INTO tasks 
         (title, description, due_date, status, priority, category, tags, user_id) 
@@ -31,7 +31,7 @@ class Task {
     return result.rows[0];
   }
 
-  static async update(id, data) {
+  static async updateTask(id, data) {
     const result = await db.query(
       `UPDATE tasks 
        SET title = $1, description = $2, due_date = $3, status = $4, 
@@ -51,7 +51,7 @@ class Task {
     return result.rows[0];
   }
 
-  static async delete(id) {
+  static async deleteTask(id) {
     const result = await db.query('DELETE FROM tasks WHERE id = $1 RETURNING *', [id]);
     return result.rowCount > 0;
   }
