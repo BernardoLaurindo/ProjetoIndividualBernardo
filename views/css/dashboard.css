@@ -1,0 +1,144 @@
+body {
+    display: flex;
+    font-family: sans-serif;
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: #f8f9fa;
+    padding-top: 1rem;
+    border-right: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 56px;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.sidebar a {
+    display: flex;
+    align-items: center;
+    padding: 1.75rem 1rem;
+    color: #333;
+    text-decoration: none;
+}
+
+.sidebar a.active {
+    background-color: #e9ecef;
+    font-weight: bold;
+}
+
+.sidebar a:hover {
+    background-color: #dee2e6;
+}
+
+/* Navbar */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background-color: white;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #ddd;
+    z-index: 2;
+}
+
+.navbar-brand {
+    font-size: 25px;
+}
+
+.d-flex img {
+    position: absolute;
+    right: 3rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    pointer-events: none;
+}
+
+.frase {
+    margin-top: 20px;
+    font-style: italic;
+    color: #000000;
+    
+}
+
+/* Conteúdo principal */
+.main-content {
+    margin-left: 250px;
+    padding-top: 180px;
+    padding-bottom: 2rem;
+    background-color: #d1d1d1;
+    flex-grow: 1;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+/* Conteúdo geral */
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Título e descrição */
+.content h1 {
+    font-size: 42px;
+    font-weight: bold;
+    margin-bottom: 1.0rem;
+}
+
+.content p {
+    font-size: 18px;
+    margin-bottom: 1.0rem;
+}
+
+/* Bloco de nova tarefa */
+.task-section {
+    width: 400px;
+}
+
+/* Botões */
+.actions-section {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.actions-section .btn {
+  padding: 0.5rem 6rem;
+  font-size: 1.0rem;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+/* Filtros */
+.filter-buttons {
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    gap: 3rem;
+    font-weight: 500;
+}
+
+.filter-buttons span {
+    cursor: pointer;
+}
+
+.filter-buttons span:hover {
+    text-decoration: underline;
+}

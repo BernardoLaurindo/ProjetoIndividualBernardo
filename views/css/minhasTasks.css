@@ -1,0 +1,130 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background: #d1d1d1;
+    color: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    display: flex;
+    max-width: 900px;
+    width: 100%;
+    height: 500px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.left-panel {
+    flex: 1;
+    background: #fff;
+    padding: 40px 30px;
+}
+
+.left-panel h1 {
+    font-size: 34px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    margin-top: 86px;
+}
+
+.left-panel p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.botoes {
+    display: flex;
+    gap: 12px;
+}
+
+.botao {
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.branco {
+    background: #fff;
+    border: 1px solid #000;
+    color: #000;
+}
+
+.branco:hover {
+    background: #f2f2f2;
+}
+
+.preto {
+    background: #000;
+    color: #fff;
+    border: none;
+}
+
+.preto:hover {
+    background: #222;
+}
+
+.lista-tarefas {
+    flex: 1;
+    background: #f9f9f9;
+    padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.tarefa {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.status small {
+    color: #666;
+    font-size: 13px;
+}
+
+.circulo {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.vermelho {
+    background: #ea4c4c;
+}
+
+.laranja {
+    background: #f9a825;
+}
+
+.verde {
+    background: #4caf50;
+}
+
+.prazo {
+    font-weight: 600;
+    font-size: 14px;
+}

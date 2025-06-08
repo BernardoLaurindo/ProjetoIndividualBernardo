@@ -1,0 +1,116 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background: #d1d1d1;
+  color: #111;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  display: flex;
+  max-width: 900px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.left-panel {
+  flex: 1;
+  background: #fff;
+  padding: 40px 30px;
+}
+
+.left-panel h1 {
+  font-size: 34px;
+  font-style: bold;
+  font-weight: 700;
+  margin-bottom: 12px;
+  margin-top: 150px;
+}
+
+.left-panel p {
+  font-size: 16px;
+  color: #555;
+}
+
+.form {
+  flex: 1;
+  background: #f9f9f9;
+  padding: 40px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.form input[type="text"],
+.form input[type="date"] {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.categorias {
+  display: flex;
+  gap: 10px;
+}
+
+.categorias label {
+  background: #eee;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.categorias input[type="radio"] {
+  margin-right: 4px;
+}
+
+.botoes {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.cancelar {
+  background: #fff;
+  border: 1px solid #000;
+  color: #000;
+}
+
+.cancelar:hover {
+  background: #f0f0f0;
+}
+
+.criar {
+  background: #000;
+  color: #fff;
+  border: none;
+}
+
+.criar:hover {
+  background: #222;
+}

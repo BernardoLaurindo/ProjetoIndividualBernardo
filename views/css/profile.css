@@ -1,0 +1,91 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #d1d1d1;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.auth-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.site-logo {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #212529;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.login-container,
+.cadastro-container {
+  background-color: #fff;
+  padding: 60px 80px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  width: 500px;
+  max-width: 90%;
+  text-align: left;
+}
+
+h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: #212529;
+}
+
+p {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+form input {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border 0.2s;
+}
+
+form input:focus {
+  border-color: #212529;
+  outline: none;
+}
+
+button.btn-login,
+button.btn-cadastrar {
+  background-color: #212529;
+  color: #fff;
+  border: none;
+  padding: 14px;
+  width: 100%;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background-color: #343a40;
+}
+
+.switch-auth {
+  margin-top: 20px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.switch-auth a {
+  color: #212529;
+  text-decoration: none;
+  font-weight: bold;
+}
