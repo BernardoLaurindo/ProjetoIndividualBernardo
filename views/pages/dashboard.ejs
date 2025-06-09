@@ -1,0 +1,107 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="../css/dashboard.css" />
+
+
+
+<div class="sidebar d-flex flex-column">
+    <a href="/dashboard" class="active">📊 Dashboard</a>
+    <a href="/minhas-tasks">📋 Minhas Tarefas</a>
+    <a href="/nova-task">📚 Adicionar Tarefa</a>
+</div>
+
+<div class="main-content">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom px-4 py-2">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <span class="navbar-brand fw-bold">TaskFlow</span>
+            <div class="frase">
+                <p>"Organize. Priorize. Conclua. Seu foco merece uma ferramenta à altura!"</p>
+            </div>
+            <form class="d-flex">
+                <img src="/assets/search.png">
+                <input type="search" placeholder="Procurar" class="pesquisar" style="width: 200px;" />
+            </form>
+        </div>
+    </nav>
+
+    <div class="content">
+        <h1>Bem-vindo ao Gerenciador</h1>
+        <p>Organize e monitore suas tarefas com facilidade.</p>
+
+        <div class="task-section">
+            <input type="text" class="form-control task-input" placeholder="Digite o nome da tarefa" />
+        </div>
+
+        <div class="actions-section">
+            <a href="/minhas-tasks" class="btn btn-outline-dark">Ver todas</a>
+            <button class="btn btn-dark">Buscar</button>
+        </div>
+
+        <div class="filter-buttons">
+            <span>Baixa</span>
+            <span>Média</span>
+            <span>Alta</span>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Função para buscar e renderizar tarefas filtradas por prioridade ou termo
+    function renderTarefas(filtroPrioridade = null, termo = '') {
+        fetch('/api/tasks')
+            .then(res => res.json())
+            .then(resposta => {
+                let tarefas = resposta.tasks || [];
+                if (termo) {
+                    tarefas = tarefas.filter(tarefa =>
+                        tarefa.titulo && tarefa.titulo.toLowerCase().includes(termo)
+                    );
+                }
+                if (filtroPrioridade) {
+                    tarefas = tarefas.filter(tarefa =>
+                        tarefa.status && tarefa.status.toLowerCase() === filtroPrioridade
+                    );
+                }
+                let html = '';
+                if (tarefas.length === 0) {
+                    html = '<p>Nenhuma tarefa encontrada.</p>';
+                } else {
+                    tarefas.forEach(tarefa => {
+                        html += `
+                        <div class="tarefa">
+                            <div class="status">
+                                <span class="circulo ${tarefa.cor || ''}"></span>
+                                <div>
+                                    <strong>${tarefa.titulo}</strong><br>
+                                    <small>${tarefa.status || ''}</small>
+                                </div>
+                            </div>
+                            <span class="prazo">Prazo: ${tarefa.prazo ? new Date(tarefa.prazo).toLocaleDateString() : ''}</span>
+                        </div>
+                    `;
+                    });
+                }
+                let lista = document.querySelector('.dashboard-lista-tarefas');
+                if (!lista) {
+                    lista = document.createElement('div');
+                    lista.className = 'dashboard-lista-tarefas';
+                    document.querySelector('.content').appendChild(lista);
+                }
+                lista.innerHTML = html;
+            });
+    }
+
+    // Buscar por texto
+    document.querySelector('.btn.btn-dark').addEventListener('click', function () {
+        const termo = document.querySelector('.task-input').value.trim().toLowerCase();
+        renderTarefas(null, termo);
+    });
+
+    // Buscar por prioridade
+    document.querySelectorAll('.filter-buttons span').forEach(span => {
+        span.style.cursor = 'pointer';
+        span.addEventListener('click', function () {
+            const prioridade = this.textContent.trim().toLowerCase();
+            renderTarefas(prioridade);
+        });
+    });
+</script>

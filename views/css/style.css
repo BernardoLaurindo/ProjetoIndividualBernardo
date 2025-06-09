@@ -1,60 +1,325 @@
-/* Reset básico para remover estilos padrão do navegador */
+/* ===================== RESET E BASE ===================== */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  /* Estilo para o corpo da página */
-  body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    background-color: #f0f0f0;
-    color: #333;
-    margin: 0;
-    padding: 0;
-  }
-  
-  /* Estilo para o cabeçalho */
-  header {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 0;
-    text-align: center;
-  }
-  
-  /* Estilo para a navegação dentro do cabeçalho */
-  header nav ul {
-    list-style-type: none;
-  }
-  
-  header nav ul li {
-    display: inline;
-    margin-right: 20px;
-  }
-  
-  header nav ul li a {
-    color: #fff;
-    text-decoration: none;
-  }
-  
-  header nav ul li a:hover {
-    text-decoration: underline;
-  }
-  
-  /* Estilo para o conteúdo principal */
-  main {
-    padding: 20px;
-  }
-  
-  /* Estilo para o rodapé */
-  footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px 0;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-  }
-  
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background: #d1d1d1;
+  color: #111;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ===================== CONTAINERS ===================== */
+.container {
+  display: flex;
+  max-width: 900px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.left-panel {
+  flex: 1;
+  background: #fff;
+  padding: 40px 30px;
+}
+
+.left-panel h1 {
+  font-size: 34px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.left-panel p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+/* ===================== BOTÕES ===================== */
+button, .botao {
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.branco, .cancelar {
+  background: #fff;
+  border: 1px solid #000;
+  color: #000;
+}
+
+.branco:hover, .cancelar:hover {
+  background: #f0f0f0;
+}
+
+.preto, .criar, .btn-login, .btn-cadastrar {
+  background: #000;
+  color: #fff;
+  border: none;
+}
+
+.preto:hover, .criar:hover, .btn-login:hover, .btn-cadastrar:hover {
+  background: #222;
+}
+
+/* ===================== DASHBOARD ===================== */
+.sidebar {
+  width: 250px;
+  background-color: #f8f9fa;
+  padding-top: 1rem;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 80px;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.sidebar a {
+  display: flex;
+  align-items: center;
+  padding: 1.75rem 1rem;
+  color: #333;
+  text-decoration: none;
+}
+
+.sidebar a.active {
+  background-color: #e9ecef;
+  font-weight: bold;
+}
+
+.sidebar a:hover {
+  background-color: #dee2e6;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background-color: white;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #ddd;
+  z-index: 2;
+}
+
+.navbar-brand {
+  font-size: 25px;
+}
+
+.d-flex img {
+  position: absolute;
+  right: 3rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+}
+
+.frase {
+  margin-top: 20px;
+  font-style: italic;
+  color: #000;
+}
+
+.main-content {
+  margin-left: 250px;
+  padding-top: 180px;
+  padding-bottom: 2rem;
+  background-color: #d1d1d1;
+  flex-grow: 1;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.task-section {
+  width: 400px;
+}
+
+.actions-section {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.actions-section .btn {
+  padding: 0.5rem 6rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.filter-buttons {
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  gap: 3rem;
+  font-weight: 500;
+}
+
+.filter-buttons span {
+  cursor: pointer;
+}
+
+.filter-buttons span:hover {
+  text-decoration: underline;
+}
+
+/* ===================== TAREFAS ===================== */
+.lista-tarefas {
+  flex: 1;
+  background: #f9f9f9;
+  padding: 40px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.tarefa {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.status small {
+  color: #666;
+  font-size: 13px;
+}
+
+.circulo {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.vermelho { background: #ea4c4c; }
+.laranja { background: #f9a825; }
+.verde { background: #4caf50; }
+
+.prazo {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* ===================== FORMULÁRIOS ===================== */
+.form {
+  flex: 1;
+  background: #f9f9f9;
+  padding: 40px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.form input[type="text"],
+.form input[type="date"],
+form input {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+/* ===================== CATEGORIAS ===================== */
+.categorias {
+  display: flex;
+  gap: 10px;
+}
+
+.categorias label {
+  background: #eee;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.categorias input[type="radio"] {
+  margin-right: 4px;
+}
+
+/* ===================== AUTENTICAÇÃO ===================== */
+.auth-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.site-logo {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #212529;
+}
+
+.login-container,
+.cadastro-container {
+  background-color: #fff;
+  padding: 60px 80px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  width: 500px;
+  max-width: 90%;
+  text-align: left;
+}
+
+h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: #212529;
+}
+
+.switch-auth {
+  margin-top: 20px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.switch-auth a {
+  color: #212529;
+  text-decoration: none;
+  font-weight: bold;
+}

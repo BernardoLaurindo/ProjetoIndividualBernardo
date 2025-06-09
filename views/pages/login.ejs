@@ -1,0 +1,37 @@
+<div class="auth-wrapper">
+    <div class="site-logo">TaskFlow</div>
+
+    <div class="login-container">
+        <h2>Bem-vindo de volta!</h2>
+        <p>Faça login para continuar organizando suas tarefas.</p>
+
+        <form id="login-form">
+            <input type="email" name="email" placeholder="E-mail" required />
+            <input type="password" name="senha" placeholder="Senha" required />
+            <button type="submit" class="btn-login">Entrar</button>
+        </form>
+
+        <p class="switch-auth">Não tem uma conta? <a href="/cadastro">Cadastre-se</a></p>
+
+
+        <script>
+            document.getElementById('login-form').addEventListener('submit', function (e) {
+                e.preventDefault();
+                fetch('/api/users/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: this.email.value,
+                        senha: this.senha.value
+                    })
+                })
+                    .then(res => res.json())
+                    .then(resp => {
+                        if (resp.sucesso) {
+                            window.location.href = '/menu';
+                        } else {
+                            alert('Login inválido!');
+                        }
+                    });
+            });
+        </script>

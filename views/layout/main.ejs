@@ -5,7 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= pageTitle %></title>  
   <style>
-    <%- include('../css/style.css'); %>
+    <%- include('../css/profile.css'); %>
+    <%- include('../css/dashboard.css'); %>
+    <%- include('../css/minhasTasks.css'); %>
+    <%- include('../css/novaTask.css'); %>
   </style>
 </head>
 <body>
@@ -14,12 +17,12 @@
 
   <main>
     <!-- Renderiza o conteúdo da página específica -->
-    <%- include(content) %>
+    <%- include('../' + content) %>
   </main>
 
   <footer>
     <!-- Rodapé comum aqui -->
-    <p>Rodapé da Aplicação</p>
+    <p></p>
   </footer>
 
   <!-- Adicione scripts JS se necessário -->

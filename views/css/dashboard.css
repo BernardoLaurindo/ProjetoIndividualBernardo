@@ -55,10 +55,16 @@ body {
     font-size: 25px;
 }
 
+.pesquisar {
+    font-size: 15px;
+    height: 10px;
+    margin-top: 1.5rem;
+}
+
 .d-flex img {
     position: absolute;
     right: 3rem;
-    top: 50%;
+    top: 53%;
     transform: translateY(-50%);
     width: 18px;
     height: 18px;
@@ -80,6 +86,7 @@ body {
     background-color: #d1d1d1;
     flex-grow: 1;
     height: 100vh;
+    width: 190vh;
     overflow-y: auto;
 }
 
@@ -141,4 +148,15 @@ body {
 
 .filter-buttons span:hover {
     text-decoration: underline;
+}
+
+.dashboard-lista-tarefas {
+    margin-top: 2rem;
+}
+.tarefa {
+    background: #fff;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 1px 4px #0001;
 }

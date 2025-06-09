@@ -1,0 +1,155 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="../css/minhasTasks.css">
+
+
+<div class="container">
+    <div class="left-panel">
+        <a href="/menu" class="btn btn-outline-dark" style="margin-bottom: 16px;">← Dashboard</a>
+        <h1>Minhas Tarefas</h1>
+        <p>Veja suas tarefas organizadas por status.</p>
+        <div class="botoes">
+            <a href="/nova-task" class="botao branco">Adicionar Tarefa</a>
+            <button class="botao preto">Filtrar por Prioridade</button>
+        </div>
+    </div>
+
+    <div id="filtro-prioridade-opcoes" style="display:none; margin-top:10px;">
+        <button class="btn btn-outline-secondary btn-sm" data-prioridade="baixa">Baixa</button>
+        <button class="btn btn-outline-secondary btn-sm" data-prioridade="media">Média</button>
+        <button class="btn btn-outline-secondary btn-sm" data-prioridade="alta">Alta</button>
+        <button class="btn btn-outline-primary btn-sm" id="mostrar-todas" style="margin-right:10px;">Mostrar Todas</button>
+        <button class="btn btn-link btn-sm" id="fechar-filtro" style="margin-left:10px;">Cancelar</button>
+    </div>
+
+    <div class="lista-tarefas">
+        <% if (tarefas && tarefas.length> 0) { %>
+            <% tarefas.forEach(tarefa=> { %>
+                <div class="tarefa">
+                    <div class="status">
+                        <span class="circulo <%= tarefa.cor %>"></span>
+                        <div>
+                            <strong>
+                                <%= tarefa.titulo %>
+                            </strong><br>
+                            <small>
+                                <%= tarefa.status %>
+                            </small>
+                        </div>
+                    </div>
+                    <span class="prazo">Prazo: <%= tarefa.prazo %></span>
+                </div>
+                <% }) %>
+                    <% } else { %>
+                        <p>Nenhuma tarefa encontrada.</p>
+                        <% } %>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        fetch('/api/tasks')
+            .then(res => res.json())
+            .then(resposta => {
+                const tarefas = resposta.tasks || [];
+                const lista = document.querySelector('.lista-tarefas');
+                lista.innerHTML = '';
+                if (tarefas.length === 0) {
+                    lista.innerHTML = '<p>Nenhuma tarefa encontrada.</p>';
+                } else {
+                    tarefas.forEach(tarefa => {
+                        lista.innerHTML += `
+          <div class="tarefa">
+            <div class="status">
+              <span class="circulo ${tarefa.cor || ''}"></span>
+              <div>
+                <strong>${tarefa.titulo}</strong><br>
+                <small>${tarefa.status || ''}</small>
+              </div>
+            </div>
+            <span class="prazo">Prazo: ${tarefa.prazo || ''}</span>
+          </div>
+        `;
+                    });
+                }
+            });
+    });
+
+
+</script>
+
+<script>
+document.querySelector('.botao.preto').addEventListener('click', function() {
+    document.getElementById('filtro-prioridade-opcoes').style.display = 'block';
+});
+
+// Fechar filtro
+document.getElementById('fechar-filtro').onclick = function() {
+    document.getElementById('filtro-prioridade-opcoes').style.display = 'none';
+};
+
+// Filtrar por prioridade
+document.querySelectorAll('#filtro-prioridade-opcoes [data-prioridade]').forEach(btn => {
+    btn.onclick = function() {
+        const prioridade = this.getAttribute('data-prioridade');
+        fetch('/api/tasks')
+            .then(res => res.json())
+            .then(resposta => {
+                const tarefas = (resposta.tasks || []).filter(tarefa =>
+                    tarefa.status && tarefa.status.toLowerCase() === prioridade
+                );
+                const lista = document.querySelector('.lista-tarefas');
+                lista.innerHTML = '';
+                if (tarefas.length === 0) {
+                    lista.innerHTML = '<p>Nenhuma tarefa encontrada.</p>';
+                } else {
+                    tarefas.forEach(tarefa => {
+                        lista.innerHTML += `
+          <div class="tarefa">
+            <div class="status">
+              <span class="circulo ${tarefa.cor || ''}"></span>
+              <div>
+                <strong>${tarefa.titulo}</strong><br>
+                <small>${tarefa.status || ''}</small>
+              </div>
+            </div>
+            <span class="prazo">Prazo: ${tarefa.prazo || ''}</span>
+          </div>
+        `;
+                    });
+                }
+                document.getElementById('filtro-prioridade-opcoes').style.display = 'none';
+            });
+    };
+});
+</script>
+
+<script>
+document.getElementById('mostrar-todas').onclick = function() {
+    fetch('/api/tasks')
+        .then(res => res.json())
+        .then(resposta => {
+            const tarefas = resposta.tasks || [];
+            const lista = document.querySelector('.lista-tarefas');
+            lista.innerHTML = '';
+            if (tarefas.length === 0) {
+                lista.innerHTML = '<p>Nenhuma tarefa encontrada.</p>';
+            } else {
+                tarefas.forEach(tarefa => {
+                    lista.innerHTML += `
+      <div class="tarefa">
+        <div class="status">
+          <span class="circulo ${tarefa.cor || ''}"></span>
+          <div>
+            <strong>${tarefa.titulo}</strong><br>
+            <small>${tarefa.status || ''}</small>
+          </div>
+        </div>
+        <span class="prazo">Prazo: ${tarefa.prazo || ''}</span>
+      </div>
+    `;
+                });
+            }
+            document.getElementById('filtro-prioridade-opcoes').style.display = 'none';
+        });
+};
+</script>

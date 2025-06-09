@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="left-panel">
+        <h1>Adicionar Nova Tarefa</h1>
+        <p>Preencha os detalhes da tarefa.</p>
+    </div>
+
+    <form class="form" id="form-tarefa" onsubmit="return false;">
+        <label for="titulo">Título da Tarefa</label>
+        <input type="text" id="titulo" name="titulo" placeholder="Digite o título da tarefa" required />
+
+        <label for="descricao">Descrição</label>
+        <input type="text" id="descricao" name="descricao" placeholder="Descreva a tarefa" />
+
+        <label for="prazo">Prazo</label>
+        <input type="date" id="prazo" name="prazo" required />
+
+        <label>Prioridade</label>
+        <div class="categorias">
+            <label><input type="radio" name="prioridade" value="baixa" required /> Baixa</label>
+            <label><input type="radio" name="prioridade" value="media" /> Média</label>
+            <label><input type="radio" name="prioridade" value="alta" /> Alta</label>
+        </div>
+
+        <div class="botoes">
+            <button type="button" class="cancelar" onclick="window.history.back()">Voltar</button>
+            <button type="submit" class="criar">Criar Tarefa</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    document.getElementById('form-tarefa').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const data = {
+            titulo: this.titulo.value,
+            descricao: this.descricao.value,
+            prazo: this.prazo.value,
+            prioridade: this.prioridade.value
+        };
+        fetch('/api/tasks', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        })
+            .then(res => res.json())
+            .then(resp => {
+                if (resp.sucesso || resp.id) {
+                    window.location.href = '/minhas-tasks';
+                } else {
+                    alert('Erro ao criar tarefa!');
+                }
+            });
+    });
+</script>

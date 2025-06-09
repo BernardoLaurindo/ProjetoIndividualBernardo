@@ -11,40 +11,47 @@ class Task {
     return result.rows[0];
   }
 
-  static async createTask(data) {
+  static async createTask(
+    titulo, descricao, prazo, status, prioridade, categoria, tags, historico, usuario_id
+  ) {
     const result = await db.query(
       `INSERT INTO tasks 
-        (title, description, due_date, status, priority, category, tags, user_id) 
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8) 
+        (titulo, descricao, prazo, status, prioridade, categoria, tags, historico, usuario_id) 
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) 
        RETURNING *`,
       [
-        data.title,
-        data.description,
-        data.due_date,
-        data.status,
-        data.priority,
-        data.category,
-        data.tags,
-        data.user_id
+        titulo,
+        descricao,
+        prazo,
+        status,
+        prioridade,
+        categoria,
+        tags,
+        historico,
+        usuario_id
       ]
     );
     return result.rows[0];
   }
 
-  static async updateTask(id, data) {
+  static async updateTask(
+    id, titulo, descricao, prazo, status, prioridade, categoria, tags, historico, usuario_id
+  ) {
     const result = await db.query(
       `UPDATE tasks 
-       SET title = $1, description = $2, due_date = $3, status = $4, 
-           priority = $5, category = $6, tags = $7, updated_at = CURRENT_TIMESTAMP 
-       WHERE id = $8 RETURNING *`,
+       SET titulo = $1, descricao = $2, prazo = $3, status = $4, 
+           prioridade = $5, categoria = $6, tags = $7, historico = $8, usuario_id = $9, updated_at = CURRENT_TIMESTAMP 
+       WHERE id = $10 RETURNING *`,
       [
-        data.title,
-        data.description,
-        data.due_date,
-        data.status,
-        data.priority,
-        data.category,
-        data.tags,
+        titulo,
+        descricao,
+        prazo,
+        status,
+        prioridade,
+        categoria,
+        tags,
+        historico,
+        usuario_id,
         id
       ]
     );

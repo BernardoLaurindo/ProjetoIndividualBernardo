@@ -11,27 +11,27 @@ class TaskItem {
     return result.rows[0];
   }
 
-  static async createTaskItem(data) {
+  static async createTaskItem(tarefa_id, usuario_id, tipo, conteudo, url_arquivo) {
     const result = await db.query(
-      `INSERT INTO task_items (task_id, user_id, type, content, file_url) 
+      `INSERT INTO task_items (tarefa_id, usuario_id, tipo, conteudo, url_arquivo) 
        VALUES ($1, $2, $3, $4, $5) RETURNING *`,
       [
-        data.task_id,
-        data.user_id,
-        data.type,
-        data.content || null,
-        data.file_url || null
+        tarefa_id,
+        usuario_id,
+        tipo,
+        conteudo || null,
+        url_arquivo || null
       ]
     );
     return result.rows[0];
   }
 
-  static async updateTaskItem(id, data) {
+  static async updateTaskItem(id, tarefa_id, usuario_id, tipo, conteudo, url_arquivo) {
     const result = await db.query(
       `UPDATE task_items 
-       SET content = $1, file_url = $2 
-       WHERE id = $3 RETURNING *`,
-      [data.content, data.file_url, id]
+       SET tarefa_id = $1, usuario_id = $2, tipo = $3, conteudo = $4, url_arquivo = $5 
+       WHERE id = $6 RETURNING *`,
+      [tarefa_id, usuario_id, tipo, conteudo, url_arquivo, id]
     );
     return result.rows[0];
   }
