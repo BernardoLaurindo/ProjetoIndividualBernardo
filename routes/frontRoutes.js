@@ -34,7 +34,7 @@ router.get('/minhas-tasks', (req, res) => {
     pageTitle: 'TaskFlow - Minhas Tasks',
     content: 'pages/minhasTasks',
     stylesheet: 'minhasTasks.css',
-    tarefas: [] // ou um array de tarefas reais se houver
+    tarefas: [] 
   });
 });
 

@@ -68,15 +68,15 @@
                     tarefas.forEach(tarefa => {
                         html += `
                         <div class="tarefa">
-                            <div class="status">
-                                <span class="circulo ${tarefa.cor || ''}"></span>
-                                <div>
-                                    <strong>${tarefa.titulo}</strong><br>
-                                    <small>${tarefa.status || ''}</small>
-                                </div>
-                            </div>
-                            <span class="prazo">Prazo: ${tarefa.prazo ? new Date(tarefa.prazo).toLocaleDateString() : ''}</span>
-                        </div>
+    <div>
+      <div class="titulo">${tarefa.titulo}</div>
+      <div class="descricao">${tarefa.descricao || ''}</div>
+      <div class="info-extra">
+        <span class="prazo">Prazo: ${tarefa.prazo ? new Date(tarefa.prazo).toLocaleDateString() : ''}</span>
+        <span class="prioridade ${tarefa.status}">${tarefa.status}</span>
+      </div>
+    </div>
+  </div>
                     `;
                     });
                 }
