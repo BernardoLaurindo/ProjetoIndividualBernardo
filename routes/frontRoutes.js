@@ -4,7 +4,7 @@ const router = express.Router();
 // Página de login
 router.get('/login', (req, res) => {
   res.render('layout/main', {
-    pageTitle: 'Página Inicial',
+    pageTitle: 'TaskFlow - Login',
     content: 'pages/login',
     stylesheet: 'profile.css'
   });
@@ -13,7 +13,7 @@ router.get('/login', (req, res) => {
 // Página de cadastro
 router.get('/cadastro', (req, res) => {
   res.render('layout/main', {
-    pageTitle: 'Cadastro',
+    pageTitle: 'TaskFlow - Cadastro',
     content: 'pages/cadastro',
     stylesheet: 'profile.css'
   });
@@ -22,7 +22,7 @@ router.get('/cadastro', (req, res) => {
 // Dashboard
 router.get('/menu', (req, res) => {
   res.render('layout/main', {
-    pageTitle: 'Dashboard',
+    pageTitle: 'TaskFlow - Dashboard',
     content: 'pages/dashboard',
     stylesheet: 'dashboard.css'
   });
@@ -31,7 +31,7 @@ router.get('/menu', (req, res) => {
 // Minhas Tasks
 router.get('/minhas-tasks', (req, res) => {
   res.render('layout/main', {
-    pageTitle: 'Minhas Tasks',
+    pageTitle: 'TaskFlow - Minhas Tasks',
     content: 'pages/minhasTasks',
     stylesheet: 'minhasTasks.css',
     tarefas: [] // ou um array de tarefas reais se houver
@@ -41,7 +41,7 @@ router.get('/minhas-tasks', (req, res) => {
 // Nova Task
 router.get('/nova-task', (req, res) => {
   res.render('layout/main', {
-    pageTitle: 'Nova Task',
+    pageTitle: 'TaskFlow - Nova Task',
     content: 'pages/novaTask',
     stylesheet: 'novaTask.css'
   });
