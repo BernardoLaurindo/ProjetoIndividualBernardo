@@ -423,7 +423,82 @@ link para melhor vizualização do WireFrame: https://www.figma.com/design/aHfdH
 
 ### 3.7 Interface e Navegação (Semana 07)
 
-*Descreva e ilustre aqui o desenvolvimento do frontend do sistema web, explicando brevemente o que foi entregue em termos de código e sistema. Utilize prints de tela para ilustrar.*
+### Visão Geral da Interface
+
+A interface do sistema foi desenvolvida para ser intuitiva, responsiva e fácil de usar, permitindo ao usuário navegar entre as principais funcionalidades de forma rápida. A navegação principal é feita por meio de uma sidebar fixa e menus no topo das páginas.
+
+---
+
+### Telas do Sistema
+
+**1. Tela de Login**
+
+- Permite ao usuário acessar o sistema com e-mail e senha.
+- Validação de campos obrigatórios e feedback de erro.
+- Link para cadastro de novo usuário.
+
+![alt text](image-1.png)
+
+---
+
+**2. Tela de Cadastro**
+
+- Formulário para criação de nova conta.
+- Campos: nome, e-mail, senha e confirmação de senha.
+- Redirecionamento para login após cadastro bem-sucedido.
+
+![alt text](image-2.png)
+---
+
+**3. Dashboard**
+
+- Página inicial após login.
+- Exibe mensagem de boas-vindas e atalhos para as principais funções.
+- Campo de busca para filtrar tarefas pelo título.
+- Filtros rápidos por prioridade (Baixa, Média, Alta).
+- Botão para visualizar todas as tarefas.
+
+![alt text](image-3.png)
+
+---
+
+**4. Tela "Minhas Tarefas"**
+
+- Lista todas as tarefas do usuário.
+- Exibe título, status, prazo e prioridade de cada tarefa.
+- Botão para adicionar nova tarefa.
+- Botão para filtrar tarefas por prioridade (abre opções de Baixa, Média, Alta).
+- Botão para mostrar todas as tarefas novamente.
+- Botão de voltar para o dashboard.
+
+![alt text](image-4.png)
+
+---
+
+**5. Tela "Adicionar Nova Tarefa"**
+
+- Formulário para criação de uma nova tarefa.
+- Campos: título, descrição, prazo e prioridade.
+- Botão para voltar à tela anterior.
+- Botão para salvar a nova tarefa.
+
+![alt text](image-5.png)
+---
+
+**6. Navegação e Experiência do Usuário**
+
+- Sidebar fixa com links para Dashboard, Minhas Tarefas e Adicionar Tarefa.
+- Botões de navegação e retorno em todas as telas principais.
+- Feedback visual para ações do usuário (ex: tarefa criada, erro de login).
+- Layout responsivo para diferentes tamanhos de tela.
+
+Print da sidebar/menu aqui
+
+---
+
+### Resumo da Navegação
+
+&emsp;O usuário pode acessar rapidamente qualquer funcionalidade principal a partir da sidebar ou dos botões de ação nas páginas. A navegação é fluida e todas as ações importantes estão a, no máximo, dois cliques de distância.
 
 ---
 
