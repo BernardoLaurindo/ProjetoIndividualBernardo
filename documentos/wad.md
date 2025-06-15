@@ -506,7 +506,137 @@ Print da sidebar/menu aqui
 
 ### 4.1 Demonstração do Sistema Web (Semana 8)
 
+### Vídeo Demonstrativo
 
+Link para o vídeo: https://drive.google.com/file/d/1I8cfVvF4z3qNId5i5uEn3lKpy5Q-JmJL/view?usp=sharing
+
+---
+
+### Descrição Geral
+&emsp;O sistema desenvolvido é um Gerenciador de Tarefas Web, que permite ao usuário cadastrar, visualizar, filtrar e gerenciar suas tarefas de forma simples e eficiente. A seguir, são apresentadas as principais funcionalidades e telas do sistema, ilustradas com prints e breves descrições.
+
+---
+
+### Funcionalidades Principais
+
+- **Autenticação de Usuário:**
+Login e cadastro com validação de dados e feedback de erro.
+
+- **Dashboard:**
+Tela inicial com atalhos para as principais funções, busca de tarefas e filtros rápidos por prioridade.
+
+- **Gestão de Tarefas:**
+Criação, visualização, filtragem e listagem de tarefas, com campos como título, descrição, prazo e prioridade.
+
+- **Navegação Intuitiva:**
+Sidebar fixa e botões de navegação para acesso rápido a todas as funcionalidades.
+
+---
+
+### Fluxo de Uso
+
+1. **Acesso ao Sistema**
+    - O usuário acessa a tela de login e, caso não tenha cadastro, pode criar uma nova conta.
+
+
+2. **Dashboard**
+
+    - Após o login, o usuário é direcionado ao dashboard, onde pode buscar tarefas, filtrar por prioridade ou acessar outras áreas do sistema.
+
+
+3. **Cadastro de Nova Tarefa**
+
+    - O usuário pode adicionar uma nova tarefa preenchendo um formulário com título, descrição, prazo e prioridade.
+
+
+4. **Visualização e Filtragem de Tarefas**
+
+    - Na tela "Minhas Tarefas", o usuário pode ver todas as suas tarefas, filtrar por prioridade ou visualizar todas novamente.
+
+
+5. **Navegação**
+
+    - O usuário pode navegar entre as telas utilizando a sidebar ou os botões de voltar presentes em cada página.
+
+---
+
+### Ilustrações do Sistema
+
+- Print da tela de login
+
+![alt text](image-1.png)
+
+- Print da tela de cadastro
+
+![alt text](image-2.png)
+
+- Print do dashboard
+
+![alt text](image-3.png)
+
+- Print da tela de tarefas
+
+![alt text](image-4.png)
+
+- Print do formulário de nova tarefa
+
+![alt text](image-5.png)
+
+---
+
+### Resumo da Entrega
+
+&emsp;O sistema entregue contempla todas as funcionalidades essenciais propostas no início do projeto, com interface responsiva, navegação fluida e integração completa entre frontend, backend e banco de dados. O código está modularizado e segue boas práticas de desenvolvimento web.
+
+---
+
+### 4.2 Conclusões e Trabalhos Futuros (Semana 8)
+
+*Indique pontos fortes e pontos a melhorar de maneira geral.*
+*Relacione também quaisquer outras ideias que você tenha para melhorias futuras.*
+
+### Pontos Fortes do Projeto
+
+- Interface intuitiva e responsiva, facilitando o uso em diferentes dispositivos.
+- Navegação simples, com acesso rápido às principais funcionalidades.
+- Integração eficiente entre frontend, backend e banco de dados.
+- Implementação de autenticação e segurança básica para usuários.
+- Estrutura modular do código, facilitando manutenção e futuras expansões.
+
+---
+
+### Pontos a Melhorar
+
+- Melhorar a experiência do usuário com feedbacks visuais mais detalhados (ex: mensagens de sucesso/erro).
+- Implementar testes automatizados para garantir a qualidade do código.
+- Otimizar o desempenho para grandes volumes de tarefas.
+- Aprimorar a validação de dados tanto no frontend quanto no backend.
+
+---
+
+### Ideias para Trabalhos Futuros
+
+- Adicionar notificações e lembretes automáticos para tarefas próximas do prazo.
+- Permitir anexar arquivos e imagens às tarefas.
+- Implementar sistema de categorias e etiquetas personalizadas.
+- Adicionar funcionalidades de colaboração (tarefas compartilhadas entre usuários).
+- Criar um painel de estatísticas e relatórios de produtividade.
+- Disponibilizar um aplicativo mobile integrado à versão web.
+
+
+## <a name="c5"></a>5. Referências
+
+- Sommerville, Ian. Engenharia de Software. 10ª edição. Pearson, 2019.
+- W3Schools. https://www.w3schools.com/
+- Mozilla Developer Network (MDN). https://developer.mozilla.org/pt-BR/
+- PostgreSQL Documentation. https://www.postgresql.org/docs/
+- Node.js Documentation. https://nodejs.org/en/docs/
+- Express.js Guide. https://expressjs.com/pt-br/
+- Bootstrap Documentation. https://getbootstrap.com/docs/5.3/getting-started/introduction/
+- Figma. https://www.figma.com/
+- SUPABASE Documentation. https://supabase.com/docs
+- YouTube – Vídeos de referência para Node.js, Express e PostgreSQL.
+- Stack Overflow – Discussões e soluções para problemas de desenvolvimento web.
 
 ---
 ---
