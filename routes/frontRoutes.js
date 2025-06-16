@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 // Página de login
-router.get('/login', (req, res) => {
+router.get('', (req, res) => {
   res.render('layout/main', {
     pageTitle: 'TaskFlow - Login',
     content: 'pages/login',
